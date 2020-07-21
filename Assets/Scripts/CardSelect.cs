@@ -8,11 +8,13 @@ public class CardSelect : MonoBehaviour
 {
     private Vector3 startScale;
     private Vector3 startRotation;
+    private Vector3 startPos;
     private int startOrder;
     private int scaling = 0;
     public float scaleAmount;
     private bool selected = false;
-    float scaleTimer = 0;
+    private float scaleTimer = 0;
+    private bool movedBack = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,13 +22,26 @@ public class CardSelect : MonoBehaviour
         startOrder = GetComponent<SpriteRenderer>().sortingOrder;
         startScale = transform.localScale;
         startRotation = transform.eulerAngles;
+        startPos = transform.position;
        
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+        if (movedBack ==false &&DialogueControl.instance.choosing==true)
+        {
+            StartCoroutine(Move(startPos));
+            transform.localScale = startScale;
+            GetComponent<SpriteRenderer>().sortingOrder = startOrder;
+            transform.eulerAngles = startRotation;
+            if (transform.position == startPos)
+            {
+                movedBack = true;
+                selected = false;
+            }
+           
+        }
 
     }
 
@@ -47,6 +62,8 @@ public class CardSelect : MonoBehaviour
     {
         selected = true;
         Select();
+        DialogueControl.instance.CardSelected(int.Parse(tag));
+        movedBack = false;
     }
     private void OnMouseExit()//invoked when mouse exits the collider of the card
     {
@@ -61,13 +78,13 @@ public class CardSelect : MonoBehaviour
 
     private void Select()//runs when a card is clicked on and therefore chosen
     {
-        StartCoroutine(Move());
+        StartCoroutine(Move(new Vector3(0, -1.5f, 0)));
     }
-    IEnumerator Move()//lerps cards position to the center
+    IEnumerator Move(Vector3 target)//lerps cards position to the target
     {
-        Vector3 target = new Vector3(0, -1.5f, 0);
+ 
         float timeSinceStart = 0;
-        float waitTime = 3f;
+        float waitTime = 0.5f;
         while (timeSinceStart < waitTime)
         {
             transform.position = Vector3.Lerp(transform.position, target,0.08f);
@@ -77,6 +94,7 @@ public class CardSelect : MonoBehaviour
         transform.position =target;
         yield return null;
     }
+
 
 
 
