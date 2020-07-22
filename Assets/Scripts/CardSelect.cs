@@ -15,6 +15,7 @@ public class CardSelect : MonoBehaviour
     private bool selected = false;
     private float scaleTimer = 0;
     private bool movedBack = true;
+    private bool movedAway = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,8 +40,14 @@ public class CardSelect : MonoBehaviour
             {
                 movedBack = true;
                 selected = false;
+                movedAway = false;
             }
-           
+        }
+        if (movedAway==false && DialogueControl.instance.choosing == false&& selected==false)
+        {
+            StartCoroutine(Move(new Vector3(startPos.x,startPos.y-8)));
+            movedBack = false;
+            movedAway = true;
         }
 
     }
@@ -48,7 +55,7 @@ public class CardSelect : MonoBehaviour
 
     private void OnMouseEnter() //invoked when mouse enters the collider of the card
     {
-        if (selected == false)
+        if (selected == false&&DialogueControl.instance.choosing==true)
         {
             //starts all hover effects
             transform.localScale = new Vector3(transform.localScale.x * 1.2f, transform.localScale.y * 1.2f, transform.localScale.z);
@@ -60,10 +67,12 @@ public class CardSelect : MonoBehaviour
 
     private void OnMouseDown()
     {
-        selected = true;
-        Select();
-        DialogueControl.instance.CardSelected(int.Parse(tag));
-        movedBack = false;
+        if (selected == false && DialogueControl.instance.choosing == true) {
+            selected = true;
+            Select();
+            DialogueControl.instance.CardSelected(int.Parse(tag));
+            movedBack = false;
+        }
     }
     private void OnMouseExit()//invoked when mouse exits the collider of the card
     {
@@ -78,7 +87,7 @@ public class CardSelect : MonoBehaviour
 
     private void Select()//runs when a card is clicked on and therefore chosen
     {
-        StartCoroutine(Move(new Vector3(0, -1.5f, 0)));
+        StartCoroutine(Move(new Vector3(7.73f, -1.29f, 0)));
     }
     IEnumerator Move(Vector3 target)//lerps cards position to the target
     {
