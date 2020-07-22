@@ -33,6 +33,7 @@ public class DialogueControl : MonoBehaviour
     private int selectedCard = -1;
     public bool choosing = false;
     private string name;
+    public GameObject dialogueBox;
 
     // Start is called before the first frame update
     void Start()
@@ -72,6 +73,7 @@ public class DialogueControl : MonoBehaviour
     public void RunStagePrompt(int stage)
     {
         DialogueSection.Clear();
+        StopAllCoroutines();
         sentences.Clear();
         nameText.text = "Choose who to ask the following question to:";
         nextButton.SetActive(false);
@@ -81,6 +83,7 @@ public class DialogueControl : MonoBehaviour
     }
     public void RunStageDialogue(int stage,int characterNum)
     {
+        
         nextButton.SetActive(true);
         DialogueSection.Clear();
         Conversation currentConv = stages[stage].conversations[characterNum];
@@ -97,8 +100,12 @@ public class DialogueControl : MonoBehaviour
         if (DialogueSection.Count == 0)
         {
             stageNum++;
+            if (stageNum>=6)
+            {
+                EndGame();
+            }
             RunStagePrompt(stageNum);
-            Debug.Log("convo over");
+
             return;
         }
         Dialogue dialogue = DialogueSection.Dequeue();
@@ -113,6 +120,12 @@ public class DialogueControl : MonoBehaviour
             }
         }
         DisplaySentence();
+    }
+
+    public void EndGame()
+    {
+        Debug.Log("end");
+        dialogueBox.SetActive(false);
     }
     public void DisplaySentence()
     {
@@ -130,7 +143,7 @@ public class DialogueControl : MonoBehaviour
 
     IEnumerator OneByOneChar(string sentence)
     {
-        Debug.Log("yo");
+
         dialogueText.text = "";
         foreach(char letter in sentence.ToCharArray())
         {
