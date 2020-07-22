@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class DialogueControl : MonoBehaviour
 {
     public static DialogueControl instance;
+  
     private void Awake()
     {
         if (instance == null)
@@ -34,31 +35,28 @@ public class DialogueControl : MonoBehaviour
     public bool choosing = false;
     private string name;
     public GameObject dialogueBox;
+    public GameObject menuButton;
+    public Dialogue monologue;
+    private bool startMonologue=true;
+    private bool end = false;
 
     // Start is called before the first frame update
     void Start()
     {
         sentences = new Queue<string>();
         DialogueSection = new Queue<Dialogue>();
-        RunStagePrompt(0);
+        StartMonologue(monologue);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        //if (Input.GetKeyDown(KeyCode.Return))
-        //{
-        //    RunStageDialogue(0,0);
-        //}
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    DisplaySentence();
-        //}
-        //if (Input.GetKeyDown(KeyCode.P))
-        //{
-        //    RunStagePrompt(0);
-        //}
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
     }
 
     public void CardSelected(int cardNum)
@@ -72,14 +70,18 @@ public class DialogueControl : MonoBehaviour
     }
     public void RunStagePrompt(int stage)
     {
-        DialogueSection.Clear();
-        StopAllCoroutines();
-        sentences.Clear();
-        nameText.text = "Choose who to ask the following question to:";
-        nextButton.SetActive(false);
-        dialogueText.text = stages[stage].startDialogue;
-        selectedCard = -1;
-        choosing = true;
+        if (end==false)
+        {
+            DialogueSection.Clear();
+            StopAllCoroutines();
+            sentences.Clear();
+            nameText.text = "Choose who to ask the following question to:";
+            nextButton.SetActive(false);
+            dialogueText.text = stages[stage].startDialogue;
+            selectedCard = -1;
+            choosing = true;
+        }
+       
     }
     public void RunStageDialogue(int stage,int characterNum)
     {
@@ -121,17 +123,43 @@ public class DialogueControl : MonoBehaviour
         }
         DisplaySentence();
     }
+    public void StartMonologue(Dialogue dialogue)
+    {
+        nameText.text = dialogue.name;
+        sentences.Clear();
+        foreach (string sentence in dialogue.sentences)
+        {
+            if (sentence != "" || sentence != null)
+            {
+                sentences.Enqueue(sentence);
+            }
+        }
+        DisplaySentence();
+    }
 
     public void EndGame()
     {
         Debug.Log("end");
-        dialogueBox.SetActive(false);
+        nameText.text = "";
+        StartCoroutine(OneByOneChar("The End"));
+        end = true;
+        nextButton.SetActive(false);
+        menuButton.SetActive(true);
     }
     public void DisplaySentence()
     {
         if (sentences.Count==0)
         {
-            RunDialogue();
+            if (startMonologue == true)
+            {
+                startMonologue = false;
+                RunStagePrompt(0);
+            }
+            else
+            {
+                RunDialogue();
+            }
+            
             return;
         }
         string sentence = sentences.Dequeue();
@@ -148,8 +176,7 @@ public class DialogueControl : MonoBehaviour
         foreach(char letter in sentence.ToCharArray())
         {
             dialogueText.text += letter;
-            yield return new WaitForSeconds(.05f);
-
+            yield return new WaitForSeconds(0.02f);
         }
     }
 }

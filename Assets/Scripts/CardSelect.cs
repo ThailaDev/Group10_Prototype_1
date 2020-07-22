@@ -40,12 +40,14 @@ public class CardSelect : MonoBehaviour
             {
                 movedBack = true;
                 selected = false;
+                movedAway = false;
             }
         }
         if (movedAway==false && DialogueControl.instance.choosing == false&& selected==false)
         {
             StartCoroutine(Move(new Vector3(startPos.x,startPos.y-8)));
             movedBack = false;
+            movedAway = true;
         }
 
     }
