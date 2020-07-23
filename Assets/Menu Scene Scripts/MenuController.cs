@@ -26,7 +26,7 @@ public class MenuController : MonoBehaviour
     {
         switch (cardNum)
         {
-            case 0: 
+            case 0: HowTo();
                 break;
             case 1: Play();
                 break;
@@ -44,6 +44,10 @@ public class MenuController : MonoBehaviour
     public void Play()
     {
         SceneManager.LoadScene(1);
+    }
+    public void HowTo()
+    {
+        SceneManager.LoadScene(2);
     }
 
 }
