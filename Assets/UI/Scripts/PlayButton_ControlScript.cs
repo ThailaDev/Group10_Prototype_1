@@ -16,6 +16,7 @@ public class PlayButton_ControlScript : MonoBehaviour
     void Start()
     {
         ButtonSound.Stop();
+        PlayButton.SetBool("Selected", false);
     }
 
     // Update is called once per frame
@@ -27,6 +28,7 @@ public class PlayButton_ControlScript : MonoBehaviour
     public void PlayButtonSelected()
     {
         PlayButton.SetBool("Selected", true);
+       
     }
 
     public void PlayButtonDeselected()
@@ -37,20 +39,20 @@ public class PlayButton_ControlScript : MonoBehaviour
     public void PlayButtonPressed()
     {
         PlayButton.SetBool("Pressed", true);
-        ButtonSound.Play();
-        StartCoroutine("ChangeScene");
+       
+        StartCoroutine(ChangeScene(SceneChangeTime));
+
+
     }
 
-  
-
-   IEnumerator ChangeScene()
+   IEnumerator ChangeScene(float SceneChangeTime)
     {
         PlayButton.SetBool("Pressed", false);
+        ButtonSound.Play();
 
-        ButtonSound.Stop();
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + SceneNumber);
 
         yield return new WaitForSeconds(SceneChangeTime);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + SceneNumber);
     }
 }
