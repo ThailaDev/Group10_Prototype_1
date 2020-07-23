@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1339,14 +1339,20 @@ MonoBehaviour:
       smuggled up an elf\u2019s ass! Let\u2019s\r just get down to business."
     - "Early this morning the body of one Trigon the Troll mailman was discovered
       in a local Disco Roller\r Club"
-    - "In moments, the entire town flocked to the scene of the crime but there were
-      three who got\r their just a little too fast! "
-    - "My 3 suspects:\r\n\u2022 Becky the Biker Unicorn\r\n\u2022 Olivia the Disco
-      racing Octopus\r\n\u2022 Gary the miniature Griffin"
+    - 'He was murdered in the dead of night, at least he was doing what he loved.
+      In my experience, small town murders aren''t very random! '
+    - The killer is a familiar face who either wanted your love, your life or your
+      wealth.
+    - "And judging by the balls spectacles \U0001F453 and having nothing stolen,
+      this was very, very personal! "
+    - In moments, the entire town flocked to the scene of the crime but through a
+      bit of investigation I narrowed it down to 3!
+    - "My 3 suspects:\r\n\u2022\tBecky the Biker Unicorn\r\n\u2022\tOlivia the Disco
+      racing Octopus\r\n\u2022\tGary the miniature Griffin\r"
     - "It\u2019s one of them, I know it is! Time to investigate\u2026"
     - "I need to question them, but I don\u2019t have that much time, so only one
-      can answer per question. I\r need to use all my investigative skills and choose
-      wisely! Lives depend on it\u2026\r"
+      can answer per question. I need to use all my investigative skills and choose
+      wisely! Lives depend on it\u2026"
 --- !u!4 &906744908
 Transform:
   m_ObjectHideFlags: 0
