@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class DialogueControl : MonoBehaviour
 {
@@ -139,13 +140,16 @@ public class DialogueControl : MonoBehaviour
 
     public void EndGame()
     {
-        Debug.Log("end");
+        
         nameText.text = "";
+        StopAllCoroutines();
         StartCoroutine(OneByOneChar("The End"));
         end = true;
         nextButton.SetActive(false);
         menuButton.SetActive(true);
     }
+
+    
     public void DisplaySentence()
     {
         if (sentences.Count==0)
@@ -171,12 +175,16 @@ public class DialogueControl : MonoBehaviour
 
     IEnumerator OneByOneChar(string sentence)
     {
-
         dialogueText.text = "";
         foreach(char letter in sentence.ToCharArray())
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(0.02f);
         }
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
