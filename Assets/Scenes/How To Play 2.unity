@@ -626,13 +626,13 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "The game consits of 5 rounds in which the player questions\nthe suspects
-    that are beleived to have been involved in the\nmurder. The Player must at the
-    start of the round must choose\na card  which represents the suspect. Following
-    which dialogue \nbetween the players character will and the chosen suspect \nwill
-    occur.\n\nThe player using the informtion gained from the dialogue must\nattempt
-    to deduce who was the killer. At the end of the 5th \nround the player will be
-    given the opportunity to choose who\nhe/she believes killed the towns mailman. "
+  m_Text: "The game consists of 5 rounds in which the player questions\nthe suspects
+    that are believed to have been involved in the\nmurder. At the start of the round,
+    the player must choose\na card which represents the suspect. Following which,
+    dialogue \nbetween the player and suspect will occur.\n\nThe player, using the
+    informtion gained from the dialogue, must\nattempt to deduce who was the killer.
+    At the end of the 5th \nround the player will be given the opportunity to choose
+    who\nthey believe killed the towns mailman. "
 --- !u!222 &1559292790
 CanvasRenderer:
   m_ObjectHideFlags: 0
