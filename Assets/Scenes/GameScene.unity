@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -972,7 +972,7 @@ MonoBehaviour:
         - Why not?
       - name: Olivia
         sentences:
-        - Just didn't want to
+        - Just didn't want to.
       - name: You
         sentences:
         - "Guess Trigon just didn\u2019t want to either."
@@ -1011,7 +1011,7 @@ MonoBehaviour:
       - name: Gary
         sentences:
         - 'I just like watching them train for the upcoming tournament! '
-        - '! I go I see the skates and Olivia and way she skates and glides and...'
+        - I go I see the skates and Olivia and way she skates and glides and...
         - I mean the way they skate! All the skaters! Yeah, you know it's just a
           fun time.
   - round: 2
@@ -1173,7 +1173,7 @@ MonoBehaviour:
           wrong. "
         - "For revenge she ended up killing you. She wasn\u2019t a murderer, but
           you turned her into one! "
-        - "She escaped and was never seen again\u2026 either were any ladybugs!"
+        - "She escaped and was never seen again\u2026 neither were any ladybugs!"
     - convCharacter: Olivia
       dialogues:
       - name: You
